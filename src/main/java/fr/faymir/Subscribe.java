@@ -15,9 +15,13 @@ import java.util.UUID;
 @Path("subscribe")
 public class Subscribe {
     private static final String defaultUsername = "#$#%$%%&&dsfduhsi$%*⁽";
+    private static final String defaultuniqueId = "0000-0000-0000-0000";
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String get(@DefaultValue(defaultUsername) @QueryParam("username") String username, @Context UriInfo uriInfo, @Context HttpServletRequest request){
+    public String get(@DefaultValue(defaultUsername) @QueryParam("username") String username,
+                      @DefaultValue(defaultuniqueId) @QueryParam("uniqueId") String uniqueId,
+                      @Context UriInfo uriInfo,
+                      @Context HttpServletRequest request){
         ConnectedUsers.updateUsersStatus();
         JSONObject obj = new JSONObject();
         System.out.println("username = [" + username + "], ip = [" + request.getRemoteAddr() + "]");
@@ -26,7 +30,12 @@ public class Subscribe {
             obj.put("message", "No username provided");
         }
         else if(ConnectedUsers.contains(username)){
-            obj.put("message", "Username already exist");
+            if (!uniqueId.equals(defaultuniqueId) && ConnectedUsers.idExist(uniqueId)){
+                fillReturnInfo(uniqueId, obj);
+                ConnectedUsers.resetUserTimer(uniqueId);
+            }
+            else
+                obj.put("message", "Username already exist");
         }
         else if(username.isEmpty()){
                 obj.put("message", "Empty username not allowed");
@@ -38,11 +47,7 @@ public class Subscribe {
         else{
             String uuid = UUID.randomUUID().toString();
             ConnectedUsers.add(new ServerUser(request.getRemoteAddr(), true, username, uuid));
-            obj.put("Type", Type.GOOD_USERNAME);
-            obj.put("usersNumber", ConnectedUsers.connectedServerUsers.size());
-            obj.put("message", "ok");
-            obj.put("uniqueId", uuid);
-            obj.put("users", ConnectedUsers.connectedServerUsers);
+            fillReturnInfo(uuid, obj);
 //            System.out.println("users = [" + (SerializationUtils.serialize(ConnectedUsers.connectedServerUsers)) + "]");
 //            System.out.println("byte array = [" + SerializationUtils.serialize(ConnectedUsers.connectedServerUsers) + "]");
 //            byte[] base64Decoded = DatatypeConverter.parseBase64Binary(base64Encoded);
@@ -50,6 +55,13 @@ public class Subscribe {
         return obj.toString();
     }
 
+    private void fillReturnInfo(String uniqueId, JSONObject obj) {
+        obj.put("Type", Type.GOOD_USERNAME);
+        obj.put("usersNumber", ConnectedUsers.connectedServerUsers.size());
+        obj.put("message", "ok");
+        obj.put("uniqueId", uniqueId);
+        obj.put("users", ConnectedUsers.connectedServerUsers);
+    }
 
 
 }

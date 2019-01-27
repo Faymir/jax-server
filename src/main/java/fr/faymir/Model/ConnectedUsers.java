@@ -32,6 +32,7 @@ public class ConnectedUsers implements Serializable {
         return connectedServerUsers.remove(serverUser);
     }
 
+
     public static boolean contains(String username){
         for (ServerUser connectedServerUser : connectedServerUsers) {
             if (connectedServerUser.getUsername().equalsIgnoreCase(username))
