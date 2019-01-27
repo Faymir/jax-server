@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="simple-service-webapp:war exploded">
-    <output-path>$PROJECT_DIR$/target/simple-service-webapp</output-path>
+    <output-path>$PROJECT_DIR$/target/Clavardage-server</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -47,7 +47,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/simple-service-webapp/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/Clavardage-server/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="simple-service-webapp/web/Web" />
     </root>

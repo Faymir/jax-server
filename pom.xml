@@ -3,14 +3,14 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>simple-service-webapp</artifactId>
+    <groupId>fr.faymir</groupId>
+    <artifactId>clavardage-server</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>simple-service-webapp</name>
+    <name>clavardage-server</name>
 
     <build>
-        <finalName>simple-service-webapp</finalName>
+        <finalName>Clavardage-server</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

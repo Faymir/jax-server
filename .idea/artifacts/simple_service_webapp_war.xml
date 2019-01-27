@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="simple-service-webapp.war">
+    <root id="archive" name="Clavardage-server.war">
       <element id="artifact" artifact-name="simple-service-webapp:war exploded" />
     </root>
   </artifact>

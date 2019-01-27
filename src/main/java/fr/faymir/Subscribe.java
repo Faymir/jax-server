@@ -20,7 +20,7 @@ public class Subscribe {
     public String get(@DefaultValue(defaultUsername) @QueryParam("username") String username, @Context UriInfo uriInfo, @Context HttpServletRequest request){
         ConnectedUsers.updateUsersStatus();
         JSONObject obj = new JSONObject();
-        System.out.println("username = [" + username + "], uriInfo = [" + uriInfo.getRequestUri().getQuery() + "]");
+        System.out.println("username = [" + username + "], ip = [" + request.getRemoteAddr() + "]");
         obj.put("Type", Type.BAD_USERNAME);
         if (uriInfo.getQueryParameters().size() == 0 || username.equals(defaultUsername)) {
             obj.put("message", "No username provided");
