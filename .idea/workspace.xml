@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99d41dfe-0869-430e-81f6-2a946e14acd5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/faymir/Model/ServerUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/faymir/Model/ServerUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/faymir/Subscribe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/faymir/Subscribe.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -26,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/fr/faymir/Subscribe.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-865">
-              <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+            <state relative-caret-position="357">
+              <caret line="38" column="70" selection-start-line="38" selection-start-column="70" selection-end-line="38" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -245,18 +244,18 @@
       <updated>1548601641710</updated>
       <workItem from="1548601643156" duration="2559000" />
       <workItem from="1548604402241" duration="3196000" />
-      <workItem from="1548757442010" duration="2851000" />
+      <workItem from="1548757442010" duration="3399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8606000" />
+    <option name="totallyTimeSpent" value="9154000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1030" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49915683" visible="true" weight="0.1670224" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49915683" visible="true" weight="0.1670224" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -269,7 +268,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33031675" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33031675" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Sequence" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
@@ -391,8 +390,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fr/faymir/Subscribe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-865">
-          <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        <state relative-caret-position="357">
+          <caret line="38" column="70" selection-start-line="38" selection-start-column="70" selection-end-line="38" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

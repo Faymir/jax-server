@@ -35,6 +35,9 @@ public class Subscribe {
         if (uriInfo.getQueryParameters().size() == 0 || username.equals(defaultUsername)) {
             obj.put("message", "No username provided");
         }
+        else if(localIp.equals("NONE")){
+            obj.put("message", "you didn't provided you localIp Adress");
+        }
         else if(ConnectedUsers.contains(username)){
             if (!uniqueId.equals(defaultuniqueId) && ConnectedUsers.idExist(uniqueId)){
                 fillReturnInfo(uniqueId, obj, ipAddress, localIp);
