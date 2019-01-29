@@ -76,7 +76,7 @@ public class Subscribe {
         users.forEach( u -> {
             if (getFirstPart(u.getIp()).equals(getFirstPart(ipAddress))){
                 if (!localIp.equals("NONE"))
-                    u.setIp(localIp);
+                    u.setIp(u.getLocalIp());
             }
         });
 
