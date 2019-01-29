@@ -11,6 +11,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import java.util.UUID;
+import java.util.Vector;
 
 @Path("subscribe")
 public class Subscribe {
@@ -20,18 +21,23 @@ public class Subscribe {
     @Produces(MediaType.APPLICATION_JSON)
     public String get(@DefaultValue(defaultUsername) @QueryParam("username") String username,
                       @DefaultValue(defaultuniqueId) @QueryParam("uniqueId") String uniqueId,
+                      @DefaultValue("NONE") @QueryParam("localIp") String localIp,
                       @Context UriInfo uriInfo,
                       @Context HttpServletRequest request){
         ConnectedUsers.updateUsersStatus();
         JSONObject obj = new JSONObject();
         System.out.println("username = [" + username + "], ip = [" + request.getRemoteAddr() + "]");
         obj.put("Type", Type.BAD_USERNAME);
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
         if (uriInfo.getQueryParameters().size() == 0 || username.equals(defaultUsername)) {
             obj.put("message", "No username provided");
         }
         else if(ConnectedUsers.contains(username)){
             if (!uniqueId.equals(defaultuniqueId) && ConnectedUsers.idExist(uniqueId)){
-                fillReturnInfo(uniqueId, obj);
+                fillReturnInfo(uniqueId, obj, ipAddress, localIp);
                 ConnectedUsers.resetUserTimer(uniqueId);
             }
             else
@@ -46,13 +52,10 @@ public class Subscribe {
         }
         else{
             String uuid = UUID.randomUUID().toString();
-            String ipAddress = request.getHeader("X-FORWARDED-FOR");
-            if (ipAddress == null) {
-                ipAddress = request.getRemoteAddr();
-            }
+
             System.out.println("\n===================== ip = [" + ipAddress + "] =========== \n");
-            ConnectedUsers.add(new ServerUser(ipAddress, true, username, uuid));
-            fillReturnInfo(uuid, obj);
+            ConnectedUsers.add(new ServerUser(ipAddress, true, username, uuid, localIp));
+            fillReturnInfo(uuid, obj, ipAddress, localIp);
 //            System.out.println("users = [" + (SerializationUtils.serialize(ConnectedUsers.connectedServerUsers)) + "]");
 //            System.out.println("byte array = [" + SerializationUtils.serialize(ConnectedUsers.connectedServerUsers) + "]");
 //            byte[] base64Decoded = DatatypeConverter.parseBase64Binary(base64Encoded);
@@ -60,13 +63,33 @@ public class Subscribe {
         return obj.toString();
     }
 
-    private void fillReturnInfo(String uniqueId, JSONObject obj) {
+    private void fillReturnInfo(String uniqueId, JSONObject obj, String ipAddress, String localIp) {
         obj.put("Type", Type.GOOD_USERNAME);
         obj.put("usersNumber", ConnectedUsers.connectedServerUsers.size());
         obj.put("message", "ok");
         obj.put("uniqueId", uniqueId);
-        obj.put("users", ConnectedUsers.connectedServerUsers);
+        Vector<ServerUser> users = (Vector<ServerUser>)ConnectedUsers.connectedServerUsers.clone();
+
+        users.forEach( u -> {
+            if (getFirstPart(u.getIp()).equals(getFirstPart(ipAddress))){
+                if (!localIp.equals("NONE"))
+                    u.setIp(localIp);
+            }
+        });
+
+        obj.put("users", users);
     }
 
+    private String getFirstPart(String ip){
+        if(!ip.contains("."))
+            return ip;
+        String [] list = ip.split(".");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.length - 1; i++) {
+            sb.append(list[i]);
+        }
+
+        return sb.toString();
+    }
 
 }

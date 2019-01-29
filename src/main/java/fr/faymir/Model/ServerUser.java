@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 public class ServerUser implements Comparable<ServerUser>, Serializable {
     private String ip = "";
+    private String localIp = "";
     private boolean online = true;
     private String username = "";
     private String uniqueId= "";
@@ -23,6 +24,10 @@ public class ServerUser implements Comparable<ServerUser>, Serializable {
         this(ip, online, username, uniqueId);
         this.lastSeen = lastSeen;
     }
+    public ServerUser(String ip, boolean online, String username, String uniqueId, String localIp){
+        this(ip, online, username, uniqueId);
+        this.localIp = localIp;
+    }
 
     public String getUsername() {
         return username;
@@ -36,14 +41,18 @@ public class ServerUser implements Comparable<ServerUser>, Serializable {
         return ip;
     }
 
+    public long getLastSeen() {
+        return lastSeen;
+    }
 
     @JSONPropertyIgnore
     public String getUniqueId() {
         return uniqueId;
     }
 
-    public long getLastSeen() {
-        return lastSeen;
+    @JSONPropertyIgnore
+    public String getLocalIp() {
+        return localIp;
     }
 
     public void setLastSeen(long lastSeen) {
