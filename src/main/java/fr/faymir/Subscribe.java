@@ -46,6 +46,11 @@ public class Subscribe {
         }
         else{
             String uuid = UUID.randomUUID().toString();
+            String ipAddress = request.getHeader("X-FORWARDED-FOR");
+            if (ipAddress == null) {
+                ipAddress = request.getRemoteAddr();
+            }
+            System.out.println("\n===================== ip = [" + ipAddress + "] =========== \n");
             ConnectedUsers.add(new ServerUser(request.getRemoteAddr(), true, username, uuid));
             fillReturnInfo(uuid, obj);
 //            System.out.println("users = [" + (SerializationUtils.serialize(ConnectedUsers.connectedServerUsers)) + "]");
