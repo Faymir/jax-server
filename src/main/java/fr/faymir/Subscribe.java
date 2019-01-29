@@ -51,7 +51,7 @@ public class Subscribe {
                 ipAddress = request.getRemoteAddr();
             }
             System.out.println("\n===================== ip = [" + ipAddress + "] =========== \n");
-            ConnectedUsers.add(new ServerUser(request.getRemoteAddr(), true, username, uuid));
+            ConnectedUsers.add(new ServerUser(ipAddress, true, username, uuid));
             fillReturnInfo(uuid, obj);
 //            System.out.println("users = [" + (SerializationUtils.serialize(ConnectedUsers.connectedServerUsers)) + "]");
 //            System.out.println("byte array = [" + SerializationUtils.serialize(ConnectedUsers.connectedServerUsers) + "]");
